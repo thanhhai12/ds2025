@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\title{TCP File Transfer Implementation in C}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+In this project, we implemented a simple file transfer system using TCP sockets in C. The system consists of a server that receives a file from a client. The file is transferred over TCP in chunks.
+
+\section{Protocol Design}
+The protocol between the client and the server is as follows:
+\begin{itemize}
+    \item The client connects to the server and sends the file in chunks.
+    \item The server receives the file, writes it to disk, and sends an acknowledgment message once the transfer is complete.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{protocol_diagram.png}
+\caption{Protocol Design for File Transfer}
+\end{figure}
+
+\section{System Organization}
+The system consists of a client and a server that communicate using TCP sockets. The client sends the file, and the server listens for incoming connections and saves the file. 
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+    \node at (0,0) {Client};
+    \node at (4,0) {Server};
+    \draw[->] (0.8, 0) -- (3.2, 0) node[midway, above] {File Transfer};
+\end{tikzpicture}
+\caption{System Organization}
+\end{figure}
+
+\section{Implementation}
+The client and server are implemented in C using the socket library. Below is a snippet of the server code that receives the file:
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#define PORT 12345
+#define BUFFER_SIZE 1024
+void receive_file(int client_socket) {
+    char buffer[BUFFER_SIZE];
+    FILE *fp = fopen("received_file.txt", "wb");
+    if (fp == NULL) {
+        perror("Error opening file");
+        return;
+    }
+    int bytes_received;
+    while ((bytes_received = recv(client_socket, buffer, sizeof(buffer), 0)) > 0) {
+        fwrite(buffer, sizeof(char), bytes_received, fp);
+    }
+    printf("File received successfully.\n");
+    fclose(fp);
+    send(client_socket, "TRANSFER_COMPLETE", 17, 0);
+}
+\end{verbatim}
+
+\section{Conclusion}
+This project successfully demonstrates the use of TCP sockets to transfer files between a client and a server. The system is capable of transferring files in chunks and confirming the transfer once completed.
+
+\end{document}
