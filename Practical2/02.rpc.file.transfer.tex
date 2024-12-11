@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{RPC File Transfer System}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this practical work, we aim to upgrade the previously implemented TCP file transfer system into an RPC-based file transfer system using gRPC. The system consists of two main components: a server that handles file upload and download requests, and a client that interacts with the server.
+
+\section{Design of RPC Service}
+The file transfer system is designed using gRPC. We define a service called \texttt{FileTransfer} with two RPC methods: \texttt{UploadFile} and \texttt{DownloadFile}. These methods allow the client to upload and download files to/from the server. The communication is based on Protocol Buffers (protobuf) for efficient data serialization.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{rpc_service_design.png}
+\caption{RPC Service Design}
+\end{figure}
+
+\section{System Organization}
+The system consists of the following components:
+\begin{itemize}
+    \item \textbf{Server:} Implements the gRPC service to handle file transfer requests.
+    \item \textbf{Client:} Sends requests to upload or download files using gRPC.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{rpc_system_organization.png}
+\caption{System Organization}
+\end{figure}
+
+\section{File Transfer Implementation}
+The file transfer functionality is implemented using gRPC in both the client and server. Below is the code snippet for the server that handles file upload and download:
+
+\begin{verbatim}
+    // Server code snippet here
+\end{verbatim}
+
+\section{Conclusion}
+This project demonstrates how to upgrade a traditional TCP file transfer system to a more modern and efficient RPC-based system using gRPC. The system allows for seamless file transfers between the client and server over a network.
+
+\end{document}
