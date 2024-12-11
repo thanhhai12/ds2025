@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{MPI File Transfer System}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this practical work, we upgrade the previously implemented TCP file transfer system to use MPI (Message Passing Interface). MPI is a standard for parallel and distributed computing, allowing processes to communicate with each other in a distributed system. In this case, MPI is used to transfer files between two processes: a server (rank 0) and a client (rank 1).
+
+\section{Why I Chose OpenMPI}
+OpenMPI is an open-source implementation of MPI, widely used in academic and research environments due to its flexibility, performance, and support across a variety of platforms. I chose OpenMPI because of its compatibility with multiple compilers and operating systems, as well as its strong community support.
+
+\section{Design of MPI File Transfer Service}
+The file transfer system is designed using MPI. The system uses a client-server model where:
+\begin{itemize}
+    \item \textbf{Server (Rank 0):} Reads the file in chunks and sends each chunk to the client.
+    \item \textbf{Client (Rank 1):} Receives each chunk and writes it to a new file to reconstruct the original file.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{mpi_file_transfer_design.png}
+\caption{MPI File Transfer Service Design}
+\end{figure}
+
+\section{System Organization}
+The system consists of two components:
+\begin{itemize}
+    \item \textbf{Server:} Responsible for reading the file in chunks and sending the data to the client.
+    \item \textbf{Client:} Receives the file chunks and writes them to disk to reconstruct the original file.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{mpi_system_organization.png}
+\caption{System Organization}
+\end{figure}
+
+\section{Implementation of File Transfer}
+The file transfer is implemented using MPI communication functions. The server sends the file in chunks using \texttt{MPI\_Send}, and the client receives the chunks with \texttt{MPI\_Recv}. Below is a code snippet from the server implementation:
+
+\begin{verbatim}
+    // Server code snippet here
+\end{verbatim}
+
+\begin{verbatim}
+    // Client code snippet here
+\end{verbatim}
+
+\section{Conclusion}
+This project demonstrates how to upgrade a TCP file transfer system to an MPI-based system for distributed file transfer. MPI provides an efficient way for processes in a distributed system to communicate and transfer large files. The client-server model in this implementation is scalable and can be adapted to more complex scenarios, such as multi-client systems.
+
+\end{document}
